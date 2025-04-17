@@ -2,5 +2,10 @@
 *.tfstate
 
 # local terraform directories
-
 **/.terraform/*
+
+# plan files
+*tfplan*
+
+# variables file .tfvars
+*.tfvars
