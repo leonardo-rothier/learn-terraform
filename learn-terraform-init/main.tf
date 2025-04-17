@@ -32,11 +32,13 @@ module "ec2-instance" {
 
 # remote module
 module "hello" {
-  source = "joatmon08/hello/random"
-  version = "4.0.0"
+  source  = "joatmon08/hello/random"
+  version = "6.0.0"
 
-  hello = "World"
-  second_hello = random_pet.instance_name.id
+  hellos = {
+    hello        = "World"
+    second_hello = random_pet.instance_name.id
+  }
 
-  secret_key = "secret"
+  some_key = "secret"
 }
