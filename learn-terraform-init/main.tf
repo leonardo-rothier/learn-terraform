@@ -22,9 +22,21 @@ resource "random_pet" "instance_name" {
   length = 4
 }
 
+# local module
 module "ec2-instance" {
   source = "./modules/aws-ec2-instance"
 
   ami_id        = data.aws_ami.ubuntu.id
   instance_name = random_pet.instance_name.id
+}
+
+# remote module
+module "hello" {
+  source = "joatmon08/hello/random"
+  version = "4.0.0"
+
+  hello = "World"
+  second_hello = random_pet.instance_name.id
+
+  secret_key = "secret"
 }
