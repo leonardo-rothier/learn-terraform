@@ -14,5 +14,4 @@ To generate them go on you AWS IAM -> Your User -> Security Credentials -> Creat
 _**Note**: in this case remember to remove the `cloud` block inside `terraform.tf` configuration._  
 ## Examples
 ### learn-terraform-init
-Used to test the terraform init command, downloading providers plugins, initilizing modules, configuring you workspace.  
-Was used an aws provider to create a EC2 resource with a instance name generated randomly using the random provider.  
+Used to test the **terraform init** command: downloading providers plugins, downloading/initilizing modules, configuring your workspace. In this module was used an aws provider to create a EC2 resource with a instance name generated randomly using the random provider.  
