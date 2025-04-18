@@ -25,3 +25,9 @@ And after as a json file:
 You can also create a destroy plan file by:  
 `terraform plan -destroy -out "tfplan-destroy"
 
+### learn-terraform-apply
+This one to test the apply of our configurations, we can use together with the previous generated plan and apply it or just run the `terraform apply` command that do boths in a single command.  
+We can too run the apply with the `-replace` flag, to force a replace to a specific resource that for some reason is not working well, that maybe beside your terraform configuration.  
+`terraform state list` to list the resources in our configuration  
+`terraform apply -replace "<resource-address>"`  
+We can also use the `-target` flag, he is a little more specific, you use when you want to modify just a specific part of your infraestructure, to apply a specific resource configuration only, rather than apply the entire configuration.
