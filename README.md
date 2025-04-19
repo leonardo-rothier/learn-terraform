@@ -31,3 +31,12 @@ We can too run the apply with the `-replace` flag, to force a replace to a speci
 `terraform state list` to list the resources in our configuration  
 `terraform apply -replace "<resource-address>"`  
 We can also use the `-target` flag, he is a little more specific, you use when you want to modify just a specific part of your infraestructure, to apply a specific resource configuration only, rather than apply the entire configuration.
+
+### learn-terraform-versions
+This directory use a hashicorp scripted code to initialize a php code served by httpd (apache) inside a provisioned EC2 instance.  
+We use some version contraints one for the version of the terraform used to manage the configuration and the other to the providers used by our terraform configuration.  
+
+As best practice we consider using the `~>` style version constraints to pin our major and minor versions. As on aws the aws provider `~> 5.95.0` it means that i want to get the latest version inside the 5.95, for example 5.95.1 when it's released.  
+
+To upgrade the version of your resource based on your defined constraints you will need to run:  
+`terraform init -upgrade`
