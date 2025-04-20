@@ -47,3 +47,13 @@ To parameterize our configuration we used the `variable` block specifying type, 
 If you don't specify a default value, you will need to pass its values some how, passing as parameter as we did with our local aws-instance module, `-var` flag during the `terraform apply` command (ex: terraform apply -var aws_region=us-east-1) or using a .tfvars file. The default name is `terraform.tfvars` otherwise you will need to use the `-var-file` flag to specify other file by its name.  
 To interpolate variables in strings, we use the `"${}"` and inside it we put the var that we want to interpolate, as on `name = "lb-${random_string.lb_id.result}-${var.project_name}"`  
 To create rules for a variable we use the `validation` block nested within the variable block.
+
+
+### learn-terraform-sensitive-variables
+Within this directory we are seeing how to protect sensitive data. The first step is to set inside the `variable` block set the variable as sensitive `sensitive = true`.  
+After this you need to decide how you are going to set these variables values:  
+- Environment variable ` export TF_VAR_var_name=value ` inside your local machine that is running the terraform commands.   
+- Through your HCP workspace's Variables page, you can add there and mark as sensitive.  
+- tfvars files, can create a `secret.tfvars` file. (Remember that it cannot be commited in your version control, use .gitignore)  
+
+Notice even flagged as sensitve, terraforms need to store these values in your state, so marking variable as sensitive is not sufficient to secure them.

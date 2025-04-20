@@ -10,3 +10,5 @@
 # variables file .tfvars
 *.tfvars
 !/learn-terraform-variables/terraform.tfvars
+!/learn-terraform-sensitive-variables/terraform.tfvars
+!/learn-terraform-sensitive-variables/secret.tfvars
