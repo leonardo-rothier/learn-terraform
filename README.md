@@ -45,5 +45,5 @@ To upgrade the version of your resource based on your defined constraints you wi
 Here we explore more about variables, parameterize this configuration with Terraform input variables. Interpolate variables to strings, and variable validation.  
 To parameterize our configuration we used the `variable` block specifying type, description and some time a default value.   
 If you don't specify a default value, you will need to pass its values some how, passing as parameter as we did with our local aws-instance module, `-var` flag during the `terraform apply` command (ex: terraform apply -var aws_region=us-east-1) or using a .tfvars file. The default name is `terraform.tfvars` otherwise you will need to use the `-var-file` flag to specify other file by its name.  
-To interpolate wevariables in string we use the `"${}"` inside a string, and inside it we put the var that we want to interpolate as on `name = "lb-${random_string.lb_id.result}-${var.project_name}"`  
+To interpolate variables in strings, we use the `"${}"` and inside it we put the var that we want to interpolate, as on `name = "lb-${random_string.lb_id.result}-${var.project_name}"`  
 To create rules for a variable we use the `validation` block nested within the variable block.
