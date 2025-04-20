@@ -22,6 +22,12 @@ variable "enable_vpn_gateway" {
   default = false
 }
 
+variable "enable_nat_gateway" {
+  description = "Enable a NAT gateway on your VPC"
+  type = bool
+  default = false  # always let it false when you are learning, it can bring high costs to your budget
+}
+
 variable "ec2_instance_type" {
   description = "AWS EC2 instance type"
   type = string
