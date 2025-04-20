@@ -57,3 +57,11 @@ After this you need to decide how you are going to set these variables values:
 - tfvars files, can create a `secret.tfvars` file. (Remember that it cannot be commited in your version control, use .gitignore)  
 
 Notice even flagged as sensitve, terraforms need to store these values in your state, so marking variable as sensitive is not sufficient to secure them.
+
+### learn-terraform-sensitive-outputs
+Here we are testing the `terraform output` funcionality, this one are basically used to export structured data about your resources configured on your configuration files.
+Are mainly used to automation tools or as a data source for another Terraform workspace.  
+To configure outputs, it's a good pratice to create a separated file called `outputs.tf`. As they are saved on the state of our terraform to get applied and ready to use 
+need to be applied before try to export the variable using the `terraform apply` command.  
+After this you can use the `terraform output` to list all outputs values from your configuration, and `terraform output <output_name>` to query one individual output. Use a `sensitive` flag inside the output block, so that terraform can redact the values of sensitive outputs to avoid accidently printing them on console.  
+Terraform output are also the only way to share data from child module to root module.
