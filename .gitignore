@@ -9,3 +9,4 @@
 
 # variables file .tfvars
 *.tfvars
+!/learn-terraform-variables/terraform.tfvars
