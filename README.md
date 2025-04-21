@@ -65,3 +65,7 @@ To configure outputs, it's a good pratice to create a separated file called `out
 need to be applied before try to export the variable using the `terraform apply` command.  
 After this you can use the `terraform output` to list all outputs values from your configuration, and `terraform output <output_name>` to query one individual output. Use a `sensitive` flag inside the output block, so that terraform can redact the values of sensitive outputs to avoid accidently printing them on console.  
 Terraform output are also the only way to share data from child module to root module.
+
+### learn-terraform-data-sources
+Here we explore the terraform data sources, on the new learn directory we use the data sources to make our configuration more dynamic.  
+First we separated the vpc configuration and aws EC2 instance configuration in two workspaces, and use the `terraform_remote_state` data source to query information about our just created VPC to fit in ours EC2 instances and its load balancer.
