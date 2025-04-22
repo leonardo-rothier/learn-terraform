@@ -69,3 +69,7 @@ Terraform output are also the only way to share data from child module to root m
 ### learn-terraform-data-sources
 Here we explore the terraform data sources, on the new learn directory we use the data sources to make our configuration more dynamic.  
 First we separated the vpc configuration and aws EC2 instance configuration in two workspaces, and use the `terraform_remote_state` data source to query information about our just created VPC to fit in ours EC2 instances and its load balancer.
+
+### learn-terraform-dependencies
+We understand here the implicit and explicit dependency between resources being created and being destroyed. The implicit is reconized by terraform by your configuration, as in the example on main.tf the `aws_eip.ip` resource need a information on the `aws_instance.example_c` resource, in this case we will have a implicit dependency solved by Terraform.  
+The explicit dependency occurs when, for example, an application running in one instance relies on a storage service or another application hosted in a different instance (e.g., a backend depending on a database). In such cases, we need to use the `depends_on` arugment within the resource block that has this internal dependency.
