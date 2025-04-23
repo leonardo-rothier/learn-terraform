@@ -78,3 +78,6 @@ The explicit dependency occurs when, for example, an application running in one 
 In this learn we show how to make terraform configuration more dynamic by using built-in functions. We used `lookup` function to access values from maps based on an input variable, passing `aws_region` variable to return a ami from a amis map.  
 We used to the `templatefile` function to generate a script with interpolated values, and the `file` function to use the contents of a file as-is within the configuration and used to pass a local created SSH key to pair to aws and used this same one to configure our ec2 instance.  
 On the script used by the templatefile we crete a systemd service to run a Go web app on the just created EC2 instance.
+
+### learn-terraform-expressions
+In this learn we see some expressions as conditional expression, how they are used and works on terrarform, basically the conditional expression works as the ternary operator on other languages ` condition ? value1 : value2 `. Other expression used on this configuration was the splat `*`, we used to create a output value, the splat expression iterate in a given list and return all the values based on the shared attibute defined, for example on `outputs.tf` the `aws_instance.ubuntu.*.private_dns` to output the private_dns from all instance resource create by our configuration.
