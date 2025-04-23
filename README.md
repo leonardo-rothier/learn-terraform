@@ -81,3 +81,6 @@ On the script used by the templatefile we crete a systemd service to run a Go we
 
 ### learn-terraform-expressions
 In this learn we see some expressions as conditional expression, how they are used and works on terrarform, basically the conditional expression works as the ternary operator on other languages ` condition ? value1 : value2 `. Other expression used on this configuration was the splat `*`, we used to create a output value, the splat expression iterate in a given list and return all the values based on the shared attibute defined, for example on `outputs.tf` the `aws_instance.ubuntu.*.private_dns` to output the private_dns from all instance resource create by our configuration.
+
+### learn-terraform-modules-use
+In this tutorial we start to use external modules for our Terraform configuration, manage module versions, configure module input variables, and use module output values. For this we use the aws vpc module tha we find on the `https://registry.terraform.io/` a published one, and the same for the ec2 instances used.
