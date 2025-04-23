@@ -1,0 +1,46 @@
+#!/bin/bash -eux
+
+set -x     # echo every command to the cloud-init log
+
+# Install necessary dependencies
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
+sudo apt-get update
+sudo apt-get -y -qq install curl wget git vim apt-transport-https ca-certificates
+sudo apt -y -qq install golang-go
+
+# Setup sudo to allow no-password sudo for your group and adding your user
+sudo groupadd -r ${department}
+sudo useradd -m -s /bin/bash ${name}
+sudo usermod -a -G ${department} ${name}
+sudo cp /etc/sudoers /etc/sudoers.orig
+echo "${name} ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/${name}
+
+sudo git clone https://github.com/hashicorp/learn-go-webapp-demo.git /opt/learn-go-webapp-demo
+sudo chown -R ${name}:${department} /opt/learn-go-webapp-demo
+
+# Build the go binary
+cd /opt/learn-go-webapp-demo
+sudo -u terraform go build -o webapp webapp.go
+# be sure that the binary is executable
+sudo chmod 750 /opt/learn-go-webapp-demo/webapp
+
+sudo tee /etc/systemd/system/webapp.service > /dev/null <<EOF
+[Unit]
+Description=Go Game Web App
+After=network.target
+
+[Service]
+User=${name}
+Group=${department}
+WorkingDirectory=/opt/learn-go-webapp-demo
+ExecStart=/opt/learn-go-webapp-demo/webapp
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl start webapp.service
+sudo systemctl enable webapp.service
+

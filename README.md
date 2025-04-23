@@ -73,3 +73,8 @@ First we separated the vpc configuration and aws EC2 instance configuration in t
 ### learn-terraform-dependencies
 We understand here the implicit and explicit dependency between resources being created and being destroyed. The implicit is reconized by terraform by your configuration, as in the example on main.tf the `aws_eip.ip` resource need a information on the `aws_instance.example_c` resource, in this case we will have a implicit dependency solved by Terraform.  
 The explicit dependency occurs when, for example, an application running in one instance relies on a storage service or another application hosted in a different instance (e.g., a backend depending on a database). In such cases, we need to use the `depends_on` arugment within the resource block that has this internal dependency.
+
+### learn-terraform-functions
+In this learn we show how to make terraform configuration more dynamic by using built-in functions. We used `lookup` function to access values from maps based on an input variable, passing `aws_region` variable to return a ami from a amis map.  
+We used to the `templatefile` function to generate a script with interpolated values, and the `file` function to use the contents of a file as-is within the configuration and used to pass a local created SSH key to pair to aws and used this same one to configure our ec2 instance.  
+On the script used by the templatefile we crete a systemd service to run a Go web app on the just created EC2 instance.
