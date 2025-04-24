@@ -87,3 +87,8 @@ In this tutorial we start to use external modules for our Terraform configuratio
 
 ### learn-terraform-modules-create
 The focus here was to create a local module, HashiCorp recommend that every Terraform configuration be created with the assumption to be reusable, this reusable configuration is called child module and are referenced by the root Terraform configuration. The reusable module created on this example was a configuration to create a aws bucket to host a static website. To configure the module we use variables to set inputs needed by this module and to exposed data about the resources we configure outputs.
+
+### learn-terraform-workspace
+Workspace helps us to complete separate enviroment and allow us to use the same Terraform code but with different state files, is very useful if you want your environment to stay as similar to each other as possible, it very useful when you are providing development infrastructure to a team that wants to simulate running in production.  
+To use this locally you can use the `terraform workspace` commands. To create the dev workspace we run `terraform workspace new dev` now if i initialized my configuration and apply it will be create a new state for this specific workspace. To select and work with other workspace environment we use the `terraform workspace select <workspace-name>` command. We used the `terraform.workspace` variable inside our configuration to modify things on our configuration considering the workspace that i'm currently using.     
+With the HCP is a little different but it works near the same. In this configuration we provisioned a instance and bucket based on its workspace, that with the same code we can deploy a dev a prod environment.
