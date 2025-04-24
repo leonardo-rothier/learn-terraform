@@ -84,3 +84,6 @@ In this learn we see some expressions as conditional expression, how they are us
 
 ### learn-terraform-modules-use
 In this tutorial we start to use external modules for our Terraform configuration, manage module versions, configure module input variables, and use module output values. For this we use the aws vpc module tha we find on the `https://registry.terraform.io/` a published one, and the same for the ec2 instances used.
+
+### learn-terraform-modules-create
+The focus here was to create a local module, HashiCorp recommend that every Terraform configuration be created with the assumption to be reusable, this reusable configuration is called child module and are referenced by the root Terraform configuration. The reusable module created on this example was a configuration to create a aws bucket to host a static website. To configure the module we use variables to set inputs needed by this module and to exposed data about the resources we configure outputs.
