@@ -13,7 +13,7 @@ data "aws_ami" "amazon_linux" {
 }
 
 resource "random_string" "instance_name" {
-  length = 2
+  length = 1
 }
 
 resource "aws_instance" "ec2" {
@@ -26,7 +26,7 @@ resource "aws_instance" "ec2" {
 }
 
 resource "random_string" "bucket_name" {
-  length = 2
+  length = 1
 }
 
 resource "aws_s3_bucket" "bucket" {
