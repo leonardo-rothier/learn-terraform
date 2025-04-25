@@ -101,3 +101,8 @@ To remove a resource from a state without destroying it, to indicate that your T
 To undo the remove resource from state file, just comment the `removed` block, uncomment the resource block and on the cli run `terraform import` command to bring this instance back into your state file:  
 `terraform import aws_instance.example_new <INSTANCE_ID>`  
 And to just update your local state if the currently state of the real infrastructure just run `terraform refresh`.
+
+### learn-terraform-targeting
+In this tutorial we provision a S3 bucket with some objects in it, and after that we applied changes incrementally using the `-target` flag option. When we use the `-target` flag terraform wll update just the resource that i'm targeting and the resources that its depends on. Example:  
+`terraform apply -target=aws_s3_object.objects[0] -target=aws_s3_object.objects[1]`  
+![Demo Screenshot](assets/terraform-target.png)
