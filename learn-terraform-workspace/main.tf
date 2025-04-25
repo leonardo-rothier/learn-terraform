@@ -30,7 +30,7 @@ resource "random_id" "bucket_suffix" {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "amzn-s3-${terraform.workspace}-${random_id.bucket_suffix.id}"
+  bucket = "amzn-s3-${terraform.workspace}-${random_id.bucket_suffix.hex}"
 
   tags = {
     Name = "S3 Test ${terraform.workspace}"
