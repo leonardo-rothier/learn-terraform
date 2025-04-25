@@ -105,4 +105,5 @@ And to just update your local state if the currently state of the real infrastru
 ### learn-terraform-targeting
 In this tutorial we provision a S3 bucket with some objects in it, and after that we applied changes incrementally using the `-target` flag option. When we use the `-target` flag terraform wll update just the resource that i'm targeting and the resources that its depends on. Example:  
 `terraform apply -target=aws_s3_object.objects[0] -target=aws_s3_object.objects[1]`  
-![Demo Screenshot](assets/terraform-target.png)
+  
+![Demo Screenshot](learn-terraform-targeting/assets/terraform-target.png)
