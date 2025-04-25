@@ -12,8 +12,8 @@ data "aws_ami" "amazon_linux" {
   }
 }
 
-resource "random_string" "instance_name" {
-  length = 1
+resource "random_id" "instance_suffix" {
+  byte_length = 5
 }
 
 resource "aws_instance" "ec2" {
@@ -21,16 +21,16 @@ resource "aws_instance" "ec2" {
   instance_type = var.instance_type
 
   tags = {
-    Name = "ec2-${terraform.workspace}-${random_string.instance_name.id}"
+    Name = "ec2-${terraform.workspace}-${random_id.instance_suffix.id}"
   }
 }
 
-resource "random_string" "bucket_name" {
-  length = 1
+resource "random_id" "bucket_suffix" {
+  byte_length = 5
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "amzn-s3-${terraform.workspace}-${random_string.bucket_name.id}"
+  bucket = "amzn-s3-${terraform.workspace}-${random_id.bucket_suffix.hex}"
 
   tags = {
     Name = "S3 Test ${terraform.workspace}"
