@@ -21,7 +21,7 @@ resource "aws_instance" "ec2" {
   instance_type = var.instance_type
 
   tags = {
-    Name = "ec2-${terraform.workspace}-${random_string.instance_name}"
+    Name = "ec2-${terraform.workspace}-${random_string.instance_name.id}"
   }
 }
 
@@ -30,7 +30,7 @@ resource "random_string" "bucket_name" {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "amzn-s3-${terraform.workspace}-${random_string.bucket_name}"
+  bucket = "amzn-s3-${terraform.workspace}-${random_string.bucket_name.id}"
 
   tags = {
     Name = "S3 Test ${terraform.workspace}"
