@@ -12,8 +12,8 @@ data "aws_ami" "amazon_linux" {
   }
 }
 
-resource "random_string" "instance_name" {
-  length = 10
+resource "random_id "instance_suffix" {
+  byte_length = 5
 }
 
 resource "aws_instance" "ec2" {
@@ -25,8 +25,8 @@ resource "aws_instance" "ec2" {
   }
 }
 
-resource "random_string" "bucket_name" {
-  length = 10
+resource "random_id" "bucket_suffix" {
+  byte_length = 5
 }
 
 resource "aws_s3_bucket" "bucket" {
