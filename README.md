@@ -107,3 +107,37 @@ In this tutorial we provision a S3 bucket with some objects in it, and after tha
 `terraform apply -target=aws_s3_object.objects[0] -target=aws_s3_object.objects[1]`  
   
 ![Demo Screenshot](learn-terraform-targeting/assets/terraform-target.png)
+
+### learn-terraform-drift-management  
+Example demonstrating Terraform drift detection and resolution after manual AWS changes.
+
+#### Steps:  
+1. **Induce Drift**:  
+   - Create a new security group allowing port 8080:  
+     ```bash
+     export SG_ID=$(aws ec2 create-security-group --group-name "sg_web" --description "allow 8080" --output text --query 'GroupId')
+     aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port 8080 --cidr 0.0.0.0/0
+     ```  
+   - Attach the SG to the EC2 instance via AWS Console (EC2 > Network Interfaces).  
+2. **Detect Drift**:  
+   ```bash
+   terraform plan -refresh-only  # Shows new SG added to EC2's security groups
+   ```  
+3. **Sync State**:  
+   ```bash
+   terraform apply -refresh-only  # Updates state to match real infrastructure
+   ```  
+4. **Reconcile Drift**:  
+   - **Update Terraform Config**: Add the new SG and its rule to your `.tf` files.  
+   - **Import Resources**:  
+     ```bash
+     terraform import aws_security_group.sg_web $SG_ID
+     terraform import aws_security_group_rule.sg_web_ingress "${SG_ID}_ingress_tcp_8080_8080_0.0.0.0/0"
+     ```  
+   - **Apply Changes**:  
+     ```bash
+     terraform apply  # Ensures configuration matches infrastructure
+     ```  
+#### Key Notes:  
+- Use `-refresh-only` to inspect/apply state changes without altering resources.  
+- Update Terraform config **and** import manually created resources to prevent future drift.  
